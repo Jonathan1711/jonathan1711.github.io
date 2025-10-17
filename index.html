@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jonathan N/Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Desktop -->
+  <div class="desktop">
+    <div class="icon" onclick="openWindow('explorer')">
+      <img src="icons/explorer.png" alt="Explorer Icon">
+      Dateien
+    </div>
+    <div class="icon" onclick="openWindow('about')">
+      <img src="icons/about.png" alt="About Icon">
+      Über mich
+    </div>
+    <div class="icon" onclick="openWindow('projects')">
+      <img src="icons/projects.png" alt="Project Icon">
+      Projekte
+    </div>
+    <div class="icon" onclick="openWindow('networkChat')">
+      <img src="icons/chat.png" alt="Chat Icon">
+      Chat
+    </div>
+  </div>
+
+  <!-- Fenster: Über mich -->
+  <div id="about" class="window">
+  <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+    <div class="title-text">Über mich.txt - Editor</div>
+    <div class="window-buttons">
+      <button onclick="minimizeWindow('about')">–</button>
+      <button onclick="maximizeWindow('about')">□</button>
+      <button onclick="closeWindow('about')">×</button>
+    </div>
+  </div>
+  <textarea class="editor-content" readonly>
+Hey! ✌️ Ich bin Jonathan Neumann, angehender Fachinformatiker für Systemintegration.
+
+Ich interessiere mich für:
+- Spielentwicklung (Hauptsächlich mit Unity)
+- Webentwicklung (HTML, CSS, JavaScript)
+- Netzwerke und IT-Sicherheit
+
+Dieses Portfolio zeigt ein paar meiner kleinen Projekte und Fähigkeiten.
+
+Im Explorer finden Sie meinen Lebenslauf und mein Anschreiben, bei den Projekten finden Sie genauere Infos zu meinen bisherigen Arbeiten und wie sie im Detail funktionieren. Viel Spaß beim Stöbern! 😄
+  </textarea>
+</div>
+
+
+  <!-- Fenster: Projekte -->
+  <div id="projects" class="window">
+  <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+    <div class="title-text">Projekte</div>
+    <div class="window-buttons">
+      <button onclick="minimizeWindow('projects')">–</button>
+      <button onclick="maximizeWindow('projects')">□</button>
+      <button onclick="closeWindow('projects')">×</button>
+    </div>
+  </div>
+  <textarea class="editor-content" readonly>
+1. Projekt:
+  3D Taxi Simulator:
+  - Mini Runner
+  - Lernziel: Player Movement, Physics, UI
+  - Github:
+
+2. Projekt:
+  Portfolio-Website:
+  - XP Style Design
+  - HTML/CSS/JS
+  - Explorer Simulation, Taskbar, Windows-like UI
+  - Github:
+
+3. Projekt:
+  Chat Andwendung über Websockets:
+  - Online Chat, bei dem jeder schreiben kann und die Nachrichten in Echzeit an alle Clients gesendet werden 
+  - Nachrichten werden auf einer kleinen Sqlite Datenbank mit Datum und Uhrzeit gespeichert 
+  - Github: 
+  </textarea>
+</div>
+
+
+  <!-- Fenster: Explorer -->
+  <div id="explorer" class="window">
+    <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+      <div class="title-text">Dateien</div>
+      <div class="window-buttons">
+        <button onclick="minimizeWindow('explorer')">–</button>
+        <button onclick="maximizeWindow('explorer')">□</button>
+        <button onclick="closeWindow('explorer')">×</button>
+      </div>
+    </div>
+
+    <!-- Adressleiste -->
+    <div class="address-bar">
+      <span>C:\MeinPortfolio</span>
+    </div>
+
+      <!-- Dateien -->
+      <div class="file-area" id="explorerContent">
+        <div class="file" onclick="openFile('file1')">
+          <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+          <span>Lebenslauf.pdf</span>
+        </div>
+        <div class="file" onclick="openFile('file2')">
+          <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png">
+          <span>Anschreiben.pdf</span>
+        </div>
+        <div class="file" onclick="openFile('image1')">
+          <img src="https://cdn-icons-png.flaticon.com/512/136/136524.png">
+          <span>Bild.png</span>
+        </div>
+        <div class="file" onclick="openFile('project1')">
+          <img src="https://cdn-icons-png.flaticon.com/512/3427/3427230.png">
+          <span>Projekt.unity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="fileDetail" style="display:none; flex-direction: column; height: 100%;">
+  <button onclick="backToFiles()" style="margin:5px; width:60px;">Back</button>
+  <div id="fileDetailContent" class="content" style="flex:1; overflow:auto;"></div>
+  </div>
+
+
+  <!-- Fenster: Datei 1 -->
+  <div id="file1" class="window">
+    <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+      <div class="title-text">Lebenslauf.pdf</div>
+      <div class="window-buttons">
+        <button onclick="closeWindow('file1')">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <p>Inhalt von Lebenslauf.pdf</p>
+    </div>
+  </div>
+
+  <div id="file2" class="window">
+    <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+      <div class="title-text">Anschreiben.pdf</div>
+      <div class="window-buttons">
+        <button onclick="closeWindow('file2')">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <p>Inhalt von Anschreiben.pdf</p>
+    </div>
+  </div>
+
+  <!-- Fenster: Bild -->
+  <div id="image1" class="window">
+    <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+      <div class="title-text">Bild.png</div>
+      <div class="window-buttons">
+        <button onclick="closeWindow('image1')">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <img src="https://via.placeholder.com/200" alt="Bild.png">
+    </div>
+  </div>
+
+  <!-- Fenster: Projekt -->
+  <div id="project1" class="window">
+    <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+      <div class="title-text">Projekt.unity</div>
+      <div class="window-buttons">
+        <button onclick="closeWindow('project1')">×</button>
+      </div>
+    </div>
+    <div class="content">
+      <p>Beschreibung des Unity-Projekts...</p>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="start-btn" onclick="toggleStartMenu()">Start</div>
+    <div class="taskbar-windows" id="taskbarWindows"></div>
+    <div class="clock" id="clock"></div>
+  </div>
+
+  <!-- Netzwerk-Chat -->
+<div id="networkChat" class="window" style="display:none; width:400px; height:300px;">
+  <div class="title-bar" onmousedown="startDrag(event, this.parentElement)">
+    <div class="title-text">Netzwerk-Chat</div>
+    <div class="window-buttons">
+      <button onclick="minimizeWindow('networkChat')">–</button>
+      <button onclick="maximizeWindow('networkChat')">□</button>
+      <button onclick="closeWindow('networkChat')">×</button>
+    </div>
+  </div>
+  <div class="content" style="display:flex; flex-direction:column; height:100%;">
+    <div id="chatMessages" style="flex:1; overflow:auto; border:1px solid #ccc; padding:5px; background:#f0f0f0; margin-bottom:5px;"></div>
+    <input id="chatInput" type="text" placeholder="Nachricht eingeben..." style="padding:5px;">
+    <div style="display:flex; gap:5px; margin-top:5px;">
+      <button onclick="sendMessage()">Senden</button>
+      <button onclick="openMessages()">Nachrichtenverlauf anzeigen</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Startmenü -->
+  <div class="start-menu" id="startMenu">
+    <div class="menu-item">Dateien</div>
+    <div class="menu-item">Über mich</div>
+    <div class="menu-item">Projekte</div>
+    <div class="menu-item">Beenden</div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

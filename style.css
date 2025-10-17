@@ -1,0 +1,226 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: url('https://i.redd.it/h0d3v4y8xg221.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Consolas, monospace;
+}
+
+.desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  padding: 10px;
+}
+
+.icon {
+  width: 80px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute;
+}
+
+.icon:nth-child(1) { top: 20px; left: 20px; }
+.icon:nth-child(2) { top: 140px; left: 20px; }
+.icon:nth-child(3) { top: 260px; left: 20px; }
+.icon:nth-child(4) { top: 380px; left: 20px; }
+
+.icon img { width: 48px; height: 48px; }
+
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to top, #245edb, #3a7cff);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: white;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.3);
+}
+
+.start-btn {
+  background: linear-gradient(to bottom, #4ba0ff, #1e5bd6);
+  border: 2px solid #0a2e91;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.clock {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Windows-Fenster */
+.window {
+  position: absolute;
+  top: 200px;
+  left: 600px;
+  width: 600px;
+  height: 400px;
+  background: #f0f0f0;
+  border: 2px solid #0050c8;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  box-sizing: border-box;
+  padding-bottom: 10px;
+}
+
+.resizer {
+  position: absolute;
+  z-index: 30;
+  background: transparent;
+}
+/* Ecken (größer für einfaches Greifen) */
+.resizer.corner { width: 12px; height: 12px; }
+.resizer.tl { left: -6px; top: -6px; cursor: nwse-resize; }
+.resizer.tr { right: -6px; top: -6px; cursor: nesw-resize; }
+.resizer.bl { left: -6px; bottom: -6px; cursor: nesw-resize; }
+.resizer.br { right: -6px; bottom: -6px; cursor: nwse-resize; }
+/* Seiten (dünn) */
+.resizer.side { width: 8px; height: calc(100% + 16px); top: -8px; }
+.resizer.left  { left: -8px;  cursor: ew-resize; }
+.resizer.right { right: -8px; cursor: ew-resize; }
+.resizer.top   { height: 8px; width: calc(100% + 16px); top: -8px; left: -8px; cursor: ns-resize; }
+.resizer.bottom{ height: 8px; width: calc(100% + 16px); bottom: -8px; left: -8px; cursor: ns-resize; z-index: 9999; }
+
+/* Optional: sichtbarer Griff beim hover (nur UX) */
+.window:hover .resizer { background: rgba(0,0,0,0.02); }
+
+.title-bar {
+  background: linear-gradient(to right, #0078d7, #00a2ff);
+  color: white;
+  padding: 5px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-buttons button {
+  margin-left: 2px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 80px;
+  gap: 10px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file img { width: 48px; height: 48px; }
+
+/* Startmenü */
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 10px;
+  width: 200px;
+  background: linear-gradient(to bottom, #ece9d8, #d0d0d0);
+  border: 2px solid #0050c8;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+  display: none;
+  flex-direction: column;
+  z-index: 20;
+  transform-origin: bottom left;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-out;
+}
+
+.start-menu.show {
+  display: flex;
+  transform: scaleY(1);
+}
+
+.start-menu .menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #bbb;
+}
+
+.start-menu .menu-item:hover {
+  background-color: #3a7cff;
+  color: white;
+}
+
+.editor-content {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  color: black;
+  background: #f0f0f0;
+  border: none;
+  resize: none;
+  outline: none;
+  overflow: auto;
+}
+
+.taskbar-windows {
+  display: flex;
+  gap: 4px;
+  margin-left: 10px;
+}
+
+.taskbar-windows button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  background: #3a7cff;
+  border: 1px solid #0a2e91;
+  color: white;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.taskbar-windows button img {
+  width: 16px;
+  height: 16px;
+}
+
+.file-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 80px;
+  gap: 80px;
+  padding: 40px;
+  overflow: auto;
+}
+
+
